@@ -106,15 +106,5 @@ public class Archivo {
     public ArrayList<Double> obtenerListaKOrdenada() {
         return K;
     }
-    
-    
-    
-    public void mostrarListaNa() {
-        for (int i = 0; i < Na.size(); i++) {
-            System.out.println("1) " + Na.get(i));
-        }
-    }
-    
-
-    
+     
 }

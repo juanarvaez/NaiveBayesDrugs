@@ -398,8 +398,8 @@ public class Principal extends javax.swing.JFrame {
         
         String[] linea = new String[9];
         linea[0] = Integer.toString(listaEdad.get(0));
-        linea[3] = Double.toString((double)Math.round(listaNa.get(0) * 10000d) / 10000d);
-        linea[6] = Double.toString((double)Math.round(listaK.get(0) * 10000d) / 10000d);
+        linea[3] = Double.toString(listaNa.get(0));
+        linea[6] = Double.toString(listaK.get(0));
         modeloOrdenamiento.addRow(linea);
         
         
@@ -427,7 +427,7 @@ public class Principal extends javax.swing.JFrame {
         ArrayList<Double> l3 = new ArrayList<>();
         
         for (int i = 0; i < 200; i++) {
-            //l1.add(Integer.parseInt(datos[i][0]));
+            l1.add(Integer.parseInt(datos[i][0]));
             l2.add(Double.parseDouble(datos[i][4]));
             l3.add(Double.parseDouble(datos[i][5]));
         }

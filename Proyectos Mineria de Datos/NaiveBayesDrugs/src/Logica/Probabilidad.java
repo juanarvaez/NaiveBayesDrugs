@@ -94,8 +94,8 @@ public class Probabilidad {
     
     public String[][] tabla3(String[][] datosProcesados) {
         String[][] datosT3 = new String[3][6];
-        int tF1 = 0; int tF2 = 0; int tF3 = 0; int tF4 = 0; int tF5 = 0;
-        int tM1 = 0; int tM2 = 0; int tM3 = 0; int tM4 = 0; int tM5 = 0;
+        int tF1 = 1; int tF2 = 1; int tF3 = 1; int tF4 = 1; int tF5 = 1;
+        int tM1 = 1; int tM2 = 1; int tM3 = 1; int tM4 = 1; int tM5 = 1;
         for (int i = 0; i < 200; i++) {
             if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][1].equals("F")) { tF1++; }
             if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][1].equals("F")) { tF2++; }
@@ -134,9 +134,9 @@ public class Probabilidad {
     
     public String[][] tabla4(String[][] datosProcesados) {
         String[][] datosT4 = new String[4][6];
-        int tHA = 0; int tHB = 0; int tHC = 0; int tHX = 0; int tHY = 0;
-        int tNA = 0; int tNB = 0; int tNC = 0; int tNX = 0; int tNY = 0;
-        int tLA = 0; int tLB = 0; int tLC = 0; int tLX = 0; int tLY = 0;
+        int tHA = 1; int tHB = 1; int tHC = 1; int tHX = 1; int tHY = 1;
+        int tNA = 1; int tNB = 1; int tNC = 1; int tNX = 1; int tNY = 1;
+        int tLA = 1; int tLB = 1; int tLC = 1; int tLX = 1; int tLY = 1;
         for (int i = 0; i < 200; i++) {
             if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][2].equals("HIGH")) { tHA++; }
             if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][2].equals("HIGH")) { tHB++; }
@@ -183,54 +183,183 @@ public class Probabilidad {
     }
     
     public String[][] tabla5(String[][] datosProcesados) {
-        String[][] datosT4 = new String[4][6];
-        int tHA = 0; int tHB = 0; int tHC = 0; int tHX = 0; int tHY = 0;
-        int tNA = 0; int tNB = 0; int tNC = 0; int tNX = 0; int tNY = 0;
-        int tLA = 0; int tLB = 0; int tLC = 0; int tLX = 0; int tLY = 0;
+        String[][] datosT5 = new String[4][6];
+        int tHA = 1; int tHB = 1; int tHC = 1; int tHX = 1; int tHY = 1;
+        int tNA = 1; int tNB = 1; int tNC = 1; int tNX = 1; int tNY = 1;
+        int tLA = 1; int tLB = 1; int tLC = 1; int tLX = 1; int tLY = 1;
         for (int i = 0; i < 200; i++) {
-            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][2].equals("HIGH")) { tHA++; }
-            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][2].equals("HIGH")) { tHB++; }
-            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][2].equals("HIGH")) { tHC++; }
-            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][2].equals("HIGH")) { tHX++; }
-            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][2].equals("HIGH")) { tHY++; }
+            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][3].equals("HIGH")) { tHA++; }
+            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][3].equals("HIGH")) { tHB++; }
+            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][3].equals("HIGH")) { tHC++; }
+            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][3].equals("HIGH")) { tHX++; }
+            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][3].equals("HIGH")) { tHY++; }
         }
         
         for (int i = 0; i < 200; i++) {
-            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][2].equals("NORMAL")) { tNA++; }
-            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][2].equals("NORMAL")) { tNB++; }
-            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][2].equals("NORMAL")) { tNC++; }
-            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][2].equals("NORMAL")) { tNX++; }
-            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][2].equals("NORMAL")) { tNY++; }
+            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][3].equals("NORMAL")) { tNA++; }
+            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][3].equals("NORMAL")) { tNB++; }
+            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][3].equals("NORMAL")) { tNC++; }
+            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][3].equals("NORMAL")) { tNX++; }
+            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][3].equals("NORMAL")) { tNY++; }
         }
         
         for (int i = 0; i < 200; i++) {
-            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][2].equals("LOW")) { tLA++; }
-            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][2].equals("LOW")) { tLB++; }
-            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][2].equals("LOW")) { tLC++; }
-            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][2].equals("LOW")) { tLX++; }
-            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][2].equals("LOW")) { tLY++; }
+            if (datosProcesados[i][6].equals("drugA") && datosProcesados[i][3].equals("LOW")) { tLA++; }
+            if (datosProcesados[i][6].equals("drugB") && datosProcesados[i][3].equals("LOW")) { tLB++; }
+            if (datosProcesados[i][6].equals("drugC") && datosProcesados[i][3].equals("LOW")) { tLC++; }
+            if (datosProcesados[i][6].equals("drugX") && datosProcesados[i][3].equals("LOW")) { tLX++; }
+            if (datosProcesados[i][6].equals("drugY") && datosProcesados[i][3].equals("LOW")) { tLY++; }
         }
         
-        datosT4[0][0] = Integer.toString(tHA); datosT4[0][1] = Integer.toString(tHB); datosT4[0][2] = Integer.toString(tHC); datosT4[0][3] = Integer.toString(tHX); datosT4[0][4] = Integer.toString(tHY); datosT4[0][5] = Integer.toString(tHA+tHB+tHC+tHX+tHY);
-        datosT4[1][0] = Integer.toString(tNA); datosT4[1][1] = Integer.toString(tNB); datosT4[1][2] = Integer.toString(tNC); datosT4[1][3] = Integer.toString(tNX); datosT4[1][4] = Integer.toString(tNY); datosT4[1][5] = Integer.toString(tNA+tNB+tNC+tNX+tNY);
-        datosT4[2][0] = Integer.toString(tLA); datosT4[2][1] = Integer.toString(tLB); datosT4[2][2] = Integer.toString(tLC); datosT4[2][3] = Integer.toString(tLX); datosT4[2][4] = Integer.toString(tLY); datosT4[2][5] = Integer.toString(tLA+tLB+tLC+tLX+tLY);
+        datosT5[0][0] = Integer.toString(tHA); datosT5[0][1] = Integer.toString(tHB); datosT5[0][2] = Integer.toString(tHC); datosT5[0][3] = Integer.toString(tHX); datosT5[0][4] = Integer.toString(tHY); datosT5[0][5] = Integer.toString(tHA+tHB+tHC+tHX+tHY);
+        datosT5[1][0] = Integer.toString(tNA); datosT5[1][1] = Integer.toString(tNB); datosT5[1][2] = Integer.toString(tNC); datosT5[1][3] = Integer.toString(tNX); datosT5[1][4] = Integer.toString(tNY); datosT5[1][5] = Integer.toString(tNA+tNB+tNC+tNX+tNY);
+        datosT5[2][0] = Integer.toString(tLA); datosT5[2][1] = Integer.toString(tLB); datosT5[2][2] = Integer.toString(tLC); datosT5[2][3] = Integer.toString(tLX); datosT5[2][4] = Integer.toString(tLY); datosT5[2][5] = Integer.toString(tLA+tLB+tLC+tLX+tLY);
         
-        datosT4[3][0] = Integer.toString(Integer.parseInt(datosT4[0][0]) + Integer.parseInt(datosT4[1][0]) + Integer.parseInt(datosT4[2][0]));
-        datosT4[3][1] = Integer.toString(Integer.parseInt(datosT4[0][1]) + Integer.parseInt(datosT4[1][1]) + Integer.parseInt(datosT4[2][1]));
-        datosT4[3][2] = Integer.toString(Integer.parseInt(datosT4[0][2]) + Integer.parseInt(datosT4[1][2]) + Integer.parseInt(datosT4[2][2]));
-        datosT4[3][3] = Integer.toString(Integer.parseInt(datosT4[0][3]) + Integer.parseInt(datosT4[1][3]) + Integer.parseInt(datosT4[2][3]));
-        datosT4[3][4] = Integer.toString(Integer.parseInt(datosT4[0][4]) + Integer.parseInt(datosT4[1][4]) + Integer.parseInt(datosT4[2][4]));
-        datosT4[3][5] = Integer.toString(Integer.parseInt(datosT4[0][5]) + Integer.parseInt(datosT4[1][5]) + Integer.parseInt(datosT4[2][5]));
+        datosT5[3][0] = Integer.toString(Integer.parseInt(datosT5[0][0]) + Integer.parseInt(datosT5[1][0]) + Integer.parseInt(datosT5[2][0]));
+        datosT5[3][1] = Integer.toString(Integer.parseInt(datosT5[0][1]) + Integer.parseInt(datosT5[1][1]) + Integer.parseInt(datosT5[2][1]));
+        datosT5[3][2] = Integer.toString(Integer.parseInt(datosT5[0][2]) + Integer.parseInt(datosT5[1][2]) + Integer.parseInt(datosT5[2][2]));
+        datosT5[3][3] = Integer.toString(Integer.parseInt(datosT5[0][3]) + Integer.parseInt(datosT5[1][3]) + Integer.parseInt(datosT5[2][3]));
+        datosT5[3][4] = Integer.toString(Integer.parseInt(datosT5[0][4]) + Integer.parseInt(datosT5[1][4]) + Integer.parseInt(datosT5[2][4]));
+        datosT5[3][5] = Integer.toString(Integer.parseInt(datosT5[0][5]) + Integer.parseInt(datosT5[1][5]) + Integer.parseInt(datosT5[2][5]));
         
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                System.out.print("  " + datosT4[i][j]);
+                System.out.print("  " + datosT5[i][j]);
             }
             System.out.println("\n");
         }
         
-        return datosT4;
+        return datosT5;
     }
+    
+    public String[][] tabla6(String[][] datosProcesados, Double precisionNa) {
+        String[][] datosT6 = new String[4][5];
+        int c1 = 0; int c2 = 0; int c3 = 0; int c4 = 0; int c5 = 0;
+        double d1, d2, d3, d4, d5;
+        double s1 = 0, s2 = 0, s3 = 0, s4 = 0, s5 = 0;
+        double a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0;
+        double m1, m2, m3, m4, m5;
+        for (int i = 0; i < 200; i++) {
+            if(datosProcesados[i][6].equals("drugA")) {
+                a1 = a1 + Double.parseDouble(datosProcesados[i][4]);
+                c1++;
+            }
+            if(datosProcesados[i][6].equals("drugB")) {
+                a2 = a2 + Double.parseDouble(datosProcesados[i][4]);
+                c2++;
+            }
+            if(datosProcesados[i][6].equals("drugC")) {
+                a3 = a3 + Double.parseDouble(datosProcesados[i][4]);
+                c3++;
+            }
+            if(datosProcesados[i][6].equals("drugX")) {
+                a4 = a4 + Double.parseDouble(datosProcesados[i][4]);
+                c4++;
+            }
+            if(datosProcesados[i][6].equals("drugY")) {
+                a5 = a5 + Double.parseDouble(datosProcesados[i][4]);
+                c5++;
+            }
+        }
+        m1 = a1/c1; m2 = a2/c2; m3 = a3/c3; m4 = a4/c4; m5 = a5/c5;
+        
+        datosT6[0][0] = Double.toString(m1); datosT6[0][1] = Double.toString(m2); datosT6[0][2] = Double.toString(m3); datosT6[0][3] = Double.toString(m4); datosT6[0][4] = Double.toString(m5);
+        
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugA")) s1 = s1 + (double) Math.pow(Double.parseDouble(datosProcesados[i][4]), 2); } s1 = s1/c1;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugB")) s2 = s2 + (double) Math.pow(Double.parseDouble(datosProcesados[i][4]), 2); } s2 = s2/c2;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugC")) s3 = s3 + (double) Math.pow(Double.parseDouble(datosProcesados[i][4]), 2); } s3 = s3/c3;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugX")) s4 = s4 + (double) Math.pow(Double.parseDouble(datosProcesados[i][4]), 2); } s4 = s4/c4;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugY")) s5 = s5 + (double) Math.pow(Double.parseDouble(datosProcesados[i][4]), 2); } s5 = s5/c5;
+        
+        d1 = Math.sqrt(s1 - Math.pow(m1, 2));
+        d2 = Math.sqrt(s2 - Math.pow(m2, 2));
+        d3 = Math.sqrt(s3 - Math.pow(m3, 2));
+        d4 = Math.sqrt(s4 - Math.pow(m4, 2));
+        d5 = Math.sqrt(s5 - Math.pow(m5, 2));
+        
+        datosT6[1][0] = Double.toString(d1); datosT6[1][1] = Double.toString(d2); datosT6[1][2] = Double.toString(d3); datosT6[1][3] = Double.toString(d4); datosT6[1][4] = Double.toString(d5);
+        
+        datosT6[2][0] = tabla1(datosProcesados)[0]; datosT6[2][1] = tabla1(datosProcesados)[1]; datosT6[2][2] = tabla1(datosProcesados)[2]; datosT6[2][3] = tabla1(datosProcesados)[3]; datosT6[2][4] = tabla1(datosProcesados)[4];
+        
+        datosT6[3][0] = Double.toString(precisionNa); datosT6[3][1] = Double.toString(precisionNa); datosT6[3][2] = Double.toString(precisionNa); datosT6[3][3] = Double.toString(precisionNa); datosT6[3][4] = Double.toString(precisionNa);
+        
+        System.out.println("\n");
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print("  " + datosT6[i][j]);
+            }
+            System.out.println("\n");
+        }
+        
+        return datosT6;
+    }
+    
+    
+    public String[][] tabla7(String[][] datosProcesados, Double precisionK) {
+        String[][] datosT7 = new String[4][5];
+        int c1 = 0; int c2 = 0; int c3 = 0; int c4 = 0; int c5 = 0;
+        double d1, d2, d3, d4, d5;
+        double s1 = 0, s2 = 0, s3 = 0, s4 = 0, s5 = 0;
+        double a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0;
+        double m1, m2, m3, m4, m5;
+        for (int i = 0; i < 200; i++) {
+            if(datosProcesados[i][6].equals("drugA")) {
+                a1 = a1 + Double.parseDouble(datosProcesados[i][5]);
+                c1++;
+            }
+            if(datosProcesados[i][6].equals("drugB")) {
+                a2 = a2 + Double.parseDouble(datosProcesados[i][5]);
+                c2++;
+            }
+            if(datosProcesados[i][6].equals("drugC")) {
+                a3 = a3 + Double.parseDouble(datosProcesados[i][5]);
+                c3++;
+            }
+            if(datosProcesados[i][6].equals("drugX")) {
+                a4 = a4 + Double.parseDouble(datosProcesados[i][5]);
+                c4++;
+            }
+            if(datosProcesados[i][6].equals("drugY")) {
+                a5 = a5 + Double.parseDouble(datosProcesados[i][5]);
+                c5++;
+            }
+        }
+        m1 = a1/c1; m2 = a2/c2; m3 = a3/c3; m4 = a4/c4; m5 = a5/c5;
+        
+        datosT7[0][0] = Double.toString(m1); datosT7[0][1] = Double.toString(m2); datosT7[0][2] = Double.toString(m3); datosT7[0][3] = Double.toString(m4); datosT7[0][4] = Double.toString(m5);
+        
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugA")) s1 = s1 + (double) Math.pow(Double.parseDouble(datosProcesados[i][5]), 2); } s1 = s1/c1;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugB")) s2 = s2 + (double) Math.pow(Double.parseDouble(datosProcesados[i][5]), 2); } s2 = s2/c2;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugC")) s3 = s3 + (double) Math.pow(Double.parseDouble(datosProcesados[i][5]), 2); } s3 = s3/c3;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugX")) s4 = s4 + (double) Math.pow(Double.parseDouble(datosProcesados[i][5]), 2); } s4 = s4/c4;
+        for (int i = 0; i < 200; i++) { if (datosProcesados[i][6].equals("drugY")) s5 = s5 + (double) Math.pow(Double.parseDouble(datosProcesados[i][5]), 2); } s5 = s5/c5;
+        
+        d1 = Math.sqrt(s1 - Math.pow(m1, 2));
+        d2 = Math.sqrt(s2 - Math.pow(m2, 2));
+        d3 = Math.sqrt(s3 - Math.pow(m3, 2));
+        d4 = Math.sqrt(s4 - Math.pow(m4, 2));
+        d5 = Math.sqrt(s5 - Math.pow(m5, 2));
+        
+        datosT7[1][0] = Double.toString(d1); datosT7[1][1] = Double.toString(d2); datosT7[1][2] = Double.toString(d3); datosT7[1][3] = Double.toString(d4); datosT7[1][4] = Double.toString(d5);
+        
+        datosT7[2][0] = tabla1(datosProcesados)[0]; datosT7[2][1] = tabla1(datosProcesados)[1]; datosT7[2][2] = tabla1(datosProcesados)[2]; datosT7[2][3] = tabla1(datosProcesados)[3]; datosT7[2][4] = tabla1(datosProcesados)[4];
+        
+        datosT7[3][0] = Double.toString(precisionK); datosT7[3][1] = Double.toString(precisionK); datosT7[3][2] = Double.toString(precisionK); datosT7[3][3] = Double.toString(precisionK); datosT7[3][4] = Double.toString(precisionK);
+        
+        System.out.println("\n");
+        
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print("  " + datosT7[i][j]);
+            }
+            System.out.println("\n");
+        }
+        
+        return datosT7;
+    }
+    
+    
     
         
     

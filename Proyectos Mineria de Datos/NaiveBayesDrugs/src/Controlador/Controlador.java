@@ -19,7 +19,7 @@ public class Controlador {
     Archivo objArchivo;
     Ordenamiento ordenamiento = new Ordenamiento();
     String[] tabla1;
-    String[][] tabla2, tabla3, tabla4;
+    String[][] tabla2, tabla3, tabla4, tabla5, tabla6, tabla7;
     
     
     
@@ -50,6 +50,10 @@ public class Controlador {
         datosTabla2(datosProcesados, Double.parseDouble(calculosOrdenamiento[6]));
         datosTabla3(datosProcesados);
         datosTabla4(datosProcesados);
+        datosTabla5(datosProcesados);
+        datosTabla6(datosProcesados, Double.parseDouble(calculosOrdenamiento[7]));
+        datosTabla7(datosProcesados, Double.parseDouble(calculosOrdenamiento[8]));
+        
         
         almacenarTablasProbabilidad();
     }
@@ -77,6 +81,21 @@ public class Controlador {
     public void datosTabla4(String[][] datosProcesados) {
         Probabilidad pr = new Probabilidad();
         tabla4 = pr.tabla4(datosProcesados);
+    }
+    
+    public void datosTabla5(String[][] datosProcesados) {
+        Probabilidad pr = new Probabilidad();
+        tabla5 = pr.tabla5(datosProcesados);
+    }
+    
+    public void datosTabla6(String[][] datosProcesados, Double precisionNa) {
+        Probabilidad pr = new Probabilidad();
+        tabla6 = pr.tabla6(datosProcesados, precisionNa);
+    }
+    
+    public void datosTabla7(String[][] datosProcesados, Double precisionK) {
+        Probabilidad pr = new Probabilidad();
+        tabla7 = pr.tabla7(datosProcesados, precisionK);
     }
     
 }

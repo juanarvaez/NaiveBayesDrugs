@@ -19,11 +19,11 @@ public class Ordenamiento {
         linea[0] = edad.get(pos).toString();                                                              //asigacion del valor de la edad
         linea[1] = Integer.toString(edad.get(pos) - edad.get(pos-1));                                     //operacion para el delta de la edad
         linea[2] = Integer.toString(decisionEdad(edad.get(pos) - edad.get(pos-1)));                       //distic
-        linea[3] = Double.toString(Na.get(pos));                    //asigacion del valor de Na
-        linea[4] = Double.toString(Na.get(pos) - Na.get(pos-1));  //operacion para el delta de Na
+        linea[3] = Double.toString(Na.get(pos));                                                          //asigacion del valor de Na
+        linea[4] = Double.toString(Na.get(pos) - Na.get(pos-1));                                          //operacion para el delta de Na
         linea[5] = Integer.toString(decisionNaOK(Na.get(pos) - Na.get(pos-1)));                           //disctic
-        linea[6] = Double.toString(K.get(pos));                     //asigacion del valor de K
-        linea[7] = Double.toString(K.get(pos) - K.get(pos-1));    //operacion para el delta de K
+        linea[6] = Double.toString(K.get(pos));                                                           //asigacion del valor de K
+        linea[7] = Double.toString(K.get(pos) - K.get(pos-1));                                            //operacion para el delta de K
         linea[8] = Integer.toString(decisionNaOK(K.get(pos) - K.get(pos-1)));                             //distic
         
         return linea;
@@ -93,7 +93,7 @@ public class Ordenamiento {
     public ArrayList<String> procesarListaEnteros(ArrayList<Integer> listaEdad, Double precision) {
         ArrayList<String> listaProcesada = new ArrayList<>();
         for (int i = 0; i < listaEdad.size(); i++) {
-            listaProcesada.add(Double.toString((Math.ceil(listaEdad.get(i)/precision)) * precision));
+            listaProcesada.add(Double.toString((Math.round(listaEdad.get(i)/precision)) * precision));
         }
         return listaProcesada;
     }
