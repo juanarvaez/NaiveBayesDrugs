@@ -16,8 +16,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TablasEntrenamiento extends javax.swing.JFrame {
     
-    DefaultTableModel t1, t2, t3, t4, t5, t6, t7, t8;
+    DefaultTableModel t1, t2, t3, t4, t5, t6, t7, t8, t9;
     ArrayList<String[]> datosEntrenamiento = new ArrayList<>();
+    String[] datosNuevoRegistro = new String[7];
+    String[] datosNuevosNormalizados;
+    String[][] probabilidades = new String[9][5];
     Archivo archivo = new Archivo();
 
     /**
@@ -36,20 +39,28 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     public final void prepararTablas() {
         t1 = new DefaultTableModel();    t2 = new DefaultTableModel();    t3 = new DefaultTableModel();
         t4 = new DefaultTableModel();    t5 = new DefaultTableModel();    t6 = new DefaultTableModel();
-        t7 = new DefaultTableModel();    t8 = new DefaultTableModel();
+        t7 = new DefaultTableModel();    t8 = new DefaultTableModel();    t9 = new DefaultTableModel();
         
-        t1.addColumn("drugA");      t2.addColumn("drugA");      t6.addColumn("drugA");      t8.addColumn("drugA");
-        t1.addColumn("drugB");      t2.addColumn("drugB");      t6.addColumn("drugB");      t8.addColumn("drugB");
-        t1.addColumn("drugC");      t2.addColumn("drugC");      t6.addColumn("drugC");      t8.addColumn("drugC");
-        t1.addColumn("drugX");      t2.addColumn("drugX");      t6.addColumn("drugD");      t8.addColumn("drugX");
-        t1.addColumn("drugY");      t2.addColumn("drugY");      t6.addColumn("drugX");      t8.addColumn("drugY");
-        t1.addColumn("Total");      t2.addColumn("Total");      t6.addColumn("Total");      t8.addColumn("Total");
+        t1.addColumn("drugA");      t2.addColumn("drugA");      t6.addColumn("drugA");      t9.addColumn("drugA");
+        t1.addColumn("drugB");      t2.addColumn("drugB");      t6.addColumn("drugB");      t9.addColumn("drugB");
+        t1.addColumn("drugC");      t2.addColumn("drugC");      t6.addColumn("drugC");      t9.addColumn("drugC");
+        t1.addColumn("drugX");      t2.addColumn("drugX");      t6.addColumn("drugD");      t9.addColumn("drugX");
+        t1.addColumn("drugY");      t2.addColumn("drugY");      t6.addColumn("drugX");      t9.addColumn("drugY");
+        t1.addColumn("Total");      t2.addColumn("Total");      t6.addColumn("Total");      t9.addColumn("Total");
         
         t3.addColumn("drugA");      t4.addColumn("drugA");      t5.addColumn("drugA");      t7.addColumn("drugA");
         t3.addColumn("drugB");      t4.addColumn("drugB");      t5.addColumn("drugB");      t7.addColumn("drugB");
         t3.addColumn("drugC");      t4.addColumn("drugC");      t5.addColumn("drugC");      t7.addColumn("drugC");
         t3.addColumn("drugX");      t4.addColumn("drugX");      t5.addColumn("drugX");      t7.addColumn("drugX");
         t3.addColumn("drugY");      t4.addColumn("drugY");      t5.addColumn("drugY");      t7.addColumn("drugY");
+        
+        t8.addColumn("Edad");
+        t8.addColumn("Sexo");
+        t8.addColumn("BP");
+        t8.addColumn("Colesterol");
+        t8.addColumn("Na");
+        t8.addColumn("K");
+        t8.addColumn("Droga");
         
         
         this.tablaBP.setModel(t1);
@@ -60,10 +71,11 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         this.tablaSexo.setModel(t6);
         this.tablaProbabilidadesGenerales.setModel(t7);
         this.tablaDatosInicialesNormalizados.setModel(t8);
+        this.tablaTotales.setModel(t9);
     }
     
     public final void llenarTablas() {
-        t8.addRow(datosEntrenamiento.get(0));
+        t9.addRow(datosEntrenamiento.get(0));
         
         for (int i = 1; i < 5; i++) t5.addRow(datosEntrenamiento.get(i));
         for (int i = 5; i < 8; i++) t6.addRow(datosEntrenamiento.get(i));
@@ -71,6 +83,23 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         for (int i = 12; i < 16; i++) t2.addRow(datosEntrenamiento.get(i));
         for (int i = 16; i < 20; i++) t3.addRow(datosEntrenamiento.get(i));
         for (int i = 20; i < 24; i++) t4.addRow(datosEntrenamiento.get(i));
+    }
+    
+    public void obtenerDatosEntrada() {
+        datosNuevoRegistro[0] = txtEdad.getText();
+        datosNuevoRegistro[1] = txtSexo.getText();
+        datosNuevoRegistro[2] = txtBP.getText();
+        datosNuevoRegistro[3] = txtColesterol.getText();
+        datosNuevoRegistro[4] = txtNa.getText();
+        datosNuevoRegistro[5] = txtK.getText();
+        datosNuevoRegistro[6] = txtDrogaEntrada.getText();
+    }
+    
+    public void normalizarDatosEntrada() {
+        datosNuevosNormalizados = datosNuevoRegistro;
+        datosNuevosNormalizados[0] = Double.toString((Math.round(Integer.parseInt(datosNuevoRegistro[0])/Double.parseDouble(datosEntrenamiento.get(4)[0]))) * Double.parseDouble(datosEntrenamiento.get(4)[0]));
+        datosNuevosNormalizados[4] = Double.toString((Math.round(Double.parseDouble(datosNuevoRegistro[4])/Double.parseDouble(datosEntrenamiento.get(19)[0]))) * Double.parseDouble(datosEntrenamiento.get(19)[0]));
+        datosNuevosNormalizados[5] = Double.toString((Math.round(Double.parseDouble(datosNuevoRegistro[5])/Double.parseDouble(datosEntrenamiento.get(23)[0]))) * Double.parseDouble(datosEntrenamiento.get(23)[0]));
     }
 
     /**
@@ -128,8 +157,12 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         txtPorcentaje = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtDrogaResultado = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tablaTotales = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaBP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +177,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaBP);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 29, 432, 92));
+
         tablaEdad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -156,6 +191,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(tablaEdad);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 432, 92));
 
         tablaColesterol.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,13 +207,19 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaColesterol);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 29, 510, 92));
+
         jLabel1.setText("Tabla 1: BP");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 64, -1));
 
         jLabel2.setText("Tabla 2: Colesterol");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 11, 107, -1));
 
         jLabel3.setText("Tabla 3: Na");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 127, 71, -1));
 
         jLabel4.setText("Tabla 5: Edad");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 85, -1));
 
         tablaSexo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,7 +233,10 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(tablaSexo);
 
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 270, 510, 76));
+
         jLabel5.setText("Tabla 6: Sexo");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 250, 107, -1));
 
         tablaK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -205,7 +251,10 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(tablaK);
 
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 147, 510, 92));
+
         jLabel6.setText("Tabla 4: K");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 127, 108, -1));
 
         tablaNa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,6 +268,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
             }
         ));
         jScrollPane7.setViewportView(tablaNa);
+
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 147, 432, 92));
 
         tablaProbabilidadesGenerales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -238,6 +289,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tablaProbabilidadesGenerales);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 393, 432, 172));
+
         tablaDatosInicialesNormalizados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -249,9 +302,13 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(tablaDatosInicialesNormalizados);
 
+        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 393, 510, 59));
+
         jLabel7.setText("Tabla 7: Probabilidades generales");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 373, 215, -1));
 
         jLabel8.setText("Tabla 8: Datos entrada/normalizados");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 373, 210, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo registro"));
 
@@ -270,6 +327,11 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         jLabel18.setText("Droga:");
 
         jButton1.setText("Registrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -309,7 +371,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDrogaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,120 +402,45 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 520, 510, -1));
+
         jLabel13.setText("Probabilidad:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, -1, 20));
+        getContentPane().add(txtProbabilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 470, 68, -1));
 
         jLabel14.setText("Porcentaje:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(634, 473, -1, -1));
+        getContentPane().add(txtPorcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 68, -1));
 
         jLabel15.setText("Droga:");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 470, -1, 20));
+        getContentPane().add(txtDrogaResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 470, 68, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6)
-                            .addComponent(jScrollPane3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5)
-                            .addComponent(jScrollPane8)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtProbabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel15)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtDrogaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(93, 93, 93)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(txtProbabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15)
-                            .addComponent(txtDrogaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel19.setText("Tabla 9: Totales de cada droga");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 576, 207, -1));
+
+        tablaTotales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane9.setViewportView(tablaTotales);
+
+        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 601, 432, 44));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        obtenerDatosEntrada();
+        t8.addRow(datosNuevoRegistro);
+        normalizarDatosEntrada();
+        t8.addRow(datosNuevosNormalizados);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,6 +489,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -519,6 +507,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable tablaBP;
     private javax.swing.JTable tablaColesterol;
     private javax.swing.JTable tablaDatosInicialesNormalizados;
@@ -527,6 +516,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     private javax.swing.JTable tablaNa;
     private javax.swing.JTable tablaProbabilidadesGenerales;
     private javax.swing.JTable tablaSexo;
+    private javax.swing.JTable tablaTotales;
     private javax.swing.JTextField txtBP;
     private javax.swing.JTextField txtColesterol;
     private javax.swing.JTextField txtDrogaEntrada;
