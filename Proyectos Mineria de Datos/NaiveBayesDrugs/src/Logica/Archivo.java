@@ -74,7 +74,7 @@ public class Archivo {
     
     //Metodo que lee los parametros de cada atributo, los organiza en un vector y los almacena en una lista
     public void obtenerParametros() {
-        for (int i = 12; i < contenido.size(); i++) {
+        for (int i = 11; i < contenido.size(); i++) {
             parametros.add(contenido.get(i).split(","));
         }
         

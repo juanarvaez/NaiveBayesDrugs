@@ -19,11 +19,11 @@ public class Ordenamiento {
         linea[0] = edad.get(pos).toString();                                                              //asigacion del valor de la edad
         linea[1] = Integer.toString(edad.get(pos) - edad.get(pos-1));                                     //operacion para el delta de la edad
         linea[2] = Integer.toString(decisionEdad(edad.get(pos) - edad.get(pos-1)));                       //distic
-        linea[3] = Double.toString((double)Math.round(Na.get(pos) * 10000d) / 10000d);                    //asigacion del valor de Na
-        linea[4] = Double.toString((double)Math.round((Na.get(pos) - Na.get(pos-1)) * 10000d) / 10000d);  //operacion para el delta de Na
+        linea[3] = Double.toString(Na.get(pos));                    //asigacion del valor de Na
+        linea[4] = Double.toString(Na.get(pos) - Na.get(pos-1));  //operacion para el delta de Na
         linea[5] = Integer.toString(decisionNaOK(Na.get(pos) - Na.get(pos-1)));                           //disctic
-        linea[6] = Double.toString((double)Math.round(K.get(pos) * 10000d) / 10000d);                     //asigacion del valor de K
-        linea[7] = Double.toString((double)Math.round((K.get(pos) - K.get(pos-1)) * 10000d) / 10000d);    //operacion para el delta de K
+        linea[6] = Double.toString(K.get(pos));                     //asigacion del valor de K
+        linea[7] = Double.toString(K.get(pos) - K.get(pos-1));    //operacion para el delta de K
         linea[8] = Integer.toString(decisionNaOK(K.get(pos) - K.get(pos-1)));                             //distic
         
         return linea;
@@ -56,7 +56,7 @@ public class Ordenamiento {
         for (int i = 1; i < lista.size(); i++) {
             resultado = resultado + (lista.get(i) - lista.get(i-1));
         }
-        return (double)Math.round(resultado * 10000d) / 10000d;
+        return resultado;
     }
     
     public int sumaDisticEntero(ArrayList<Integer> lista) {
@@ -83,9 +83,9 @@ public class Ordenamiento {
         calculos[3] = Double.toString(sumaDisticDouble(Na));
         calculos[4] = Double.toString(sumaDeltaDouble(K));
         calculos[5] = Double.toString(sumaDisticDouble(K));
-        calculos[6] = Double.toString((double)Math.round(((double)sumaDeltaEnteros(edad)/(double)sumaDisticEntero(edad)) * 10000d) / 10000d);
-        calculos[7] = Double.toString((double)Math.round((sumaDeltaDouble(Na)/sumaDisticDouble(Na)) * 10000d) / 10000d);
-        calculos[8] = Double.toString((double)Math.round((sumaDeltaDouble(K)/sumaDisticDouble(K)) * 10000d) / 10000d);
+        calculos[6] = Double.toString((double)sumaDeltaEnteros(edad)/(double)sumaDisticEntero(edad));
+        calculos[7] = Double.toString(sumaDeltaDouble(Na)/sumaDisticDouble(Na));
+        calculos[8] = Double.toString(sumaDeltaDouble(K)/sumaDisticDouble(K));
         
         return calculos;
     }

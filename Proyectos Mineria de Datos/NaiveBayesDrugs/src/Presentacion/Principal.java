@@ -427,7 +427,7 @@ public class Principal extends javax.swing.JFrame {
         ArrayList<Double> l3 = new ArrayList<>();
         
         for (int i = 0; i < 200; i++) {
-            l1.add(Integer.parseInt(datos[i][0]));
+            //l1.add(Integer.parseInt(datos[i][0]));
             l2.add(Double.parseDouble(datos[i][4]));
             l3.add(Double.parseDouble(datos[i][5]));
         }
