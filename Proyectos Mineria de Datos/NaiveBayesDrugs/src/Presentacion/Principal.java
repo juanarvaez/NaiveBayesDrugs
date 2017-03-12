@@ -392,80 +392,98 @@ public class Principal extends javax.swing.JFrame {
     private void btnRealizarEntrenamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEntrenamientoActionPerformed
         // TODO add your handling code here:
         modeloOrdenamiento.setRowCount(0);
-        Collections.sort(listaEdad);
-        Collections.sort(listaNa);
-        Collections.sort(listaK);
-        
-        String[] linea = new String[9];
-        linea[0] = Integer.toString(listaEdad.get(0));
-        linea[3] = Double.toString(listaNa.get(0));
-        linea[6] = Double.toString(listaK.get(0));
-        modeloOrdenamiento.addRow(linea);
-        
-        
-        for (int i = 1; i < listaParametros.size(); i++) {
-            
-            modeloOrdenamiento.addRow(controlador.datosOrdenados(listaEdad, listaNa, listaK, i));
-        }
-        
-        calculosOrdenamiento = controlador.calculosOrdenamiento(listaEdad, listaNa, listaK);
-        
-        txtDeltaEdad.setText(calculosOrdenamiento[0]);
-        txtDisticEdad.setText(calculosOrdenamiento[1]);
-        txtDeltaNa.setText(calculosOrdenamiento[2]);
-        txtDisticNa.setText(calculosOrdenamiento[3]);
-        txtDeltaK.setText(calculosOrdenamiento[4]);
-        txtDisticK.setText(calculosOrdenamiento[5]);
-        txtPrecisionEdad.setText(calculosOrdenamiento[6]);
-        txtPrecisionNa.setText(calculosOrdenamiento[7]);
-        txtPrecisionK.setText(calculosOrdenamiento[8]);
-        
-        datosProcesados = datos;
-        
-        ArrayList<Integer> l1 = new ArrayList<>();
-        ArrayList<Double> l2 = new ArrayList<>();
-        ArrayList<Double> l3 = new ArrayList<>();
-        
-        for (int i = 0; i < 200; i++) {
-            l1.add(Integer.parseInt(datos[i][0]));
-            l2.add(Double.parseDouble(datos[i][4]));
-            l3.add(Double.parseDouble(datos[i][5]));
-        }
-        
-        
-        ArrayList<String> ledad = controlador.procesarDatosEntero(l1, Double.parseDouble(calculosOrdenamiento[6]));
-        ArrayList<String> lna = controlador.procesarDatosDecimales(l2, Double.parseDouble(calculosOrdenamiento[7]));
-        ArrayList<String> lk = controlador.procesarDatosDecimales(l3, Double.parseDouble(calculosOrdenamiento[8]));
-        
-        for (int i = 0; i < ledad.size(); i++) {
-            datosProcesados[i][0] = ledad.get(i);
-            datosProcesados[i][4] = lna.get(i);
-            datosProcesados[i][5] = lk.get(i);
-        }
-        
-        
-        
-        String[] vector = new String[7];
-        for (int i = 0; i < 200; i++) {
-            for (int j = 0; j < 7; j++) {
-                vector[j] = datosProcesados[i][j];
+        try {
+            Collections.sort(listaEdad);
+            Collections.sort(listaNa);
+            Collections.sort(listaK);
+
+            String[] linea = new String[9];
+            linea[0] = Integer.toString(listaEdad.get(0));
+            linea[3] = Double.toString(listaNa.get(0));
+            linea[6] = Double.toString(listaK.get(0));
+            modeloOrdenamiento.addRow(linea);
+
+
+            for (int i = 1; i < listaParametros.size(); i++) {
+
+                modeloOrdenamiento.addRow(controlador.datosOrdenados(listaEdad, listaNa, listaK, i));
             }
-            modeloProcesado.addRow(vector);
+
+            calculosOrdenamiento = controlador.calculosOrdenamiento(listaEdad, listaNa, listaK);
+
+            txtDeltaEdad.setText(calculosOrdenamiento[0]);
+            txtDisticEdad.setText(calculosOrdenamiento[1]);
+            txtDeltaNa.setText(calculosOrdenamiento[2]);
+            txtDisticNa.setText(calculosOrdenamiento[3]);
+            txtDeltaK.setText(calculosOrdenamiento[4]);
+            txtDisticK.setText(calculosOrdenamiento[5]);
+            txtPrecisionEdad.setText(calculosOrdenamiento[6]);
+            txtPrecisionNa.setText(calculosOrdenamiento[7]);
+            txtPrecisionK.setText(calculosOrdenamiento[8]);
+
+            datosProcesados = datos;
+
+            ArrayList<Integer> l1 = new ArrayList<>();
+            ArrayList<Double> l2 = new ArrayList<>();
+            ArrayList<Double> l3 = new ArrayList<>();
+
+            for (int i = 0; i < 200; i++) {
+                l1.add(Integer.parseInt(datos[i][0]));
+                l2.add(Double.parseDouble(datos[i][4]));
+                l3.add(Double.parseDouble(datos[i][5]));
+            }
+
+            ArrayList<String> ledad = controlador.procesarDatosEntero(l1, Double.parseDouble(calculosOrdenamiento[6]));
+            ArrayList<String> lna = controlador.procesarDatosDecimales(l2, Double.parseDouble(calculosOrdenamiento[7]));
+            ArrayList<String> lk = controlador.procesarDatosDecimales(l3, Double.parseDouble(calculosOrdenamiento[8]));
+
+            for (int i = 0; i < ledad.size(); i++) {
+                datosProcesados[i][0] = ledad.get(i);
+                datosProcesados[i][4] = lna.get(i);
+                datosProcesados[i][5] = lk.get(i);
+            }
+
+            String[] vector = new String[7];
+            for (int i = 0; i < 200; i++) {
+                for (int j = 0; j < 7; j++) {
+                    vector[j] = datosProcesados[i][j];
+                }
+                modeloProcesado.addRow(vector);
+            }
+
+            
+            controlador.obtenerTablasProbabilidad(datosProcesados, calculosOrdenamiento);
+            controlador.guardarDatosEntrenamiento();
         }
-        
-        controlador.obtenerTablasProbabilidad(datosProcesados, calculosOrdenamiento);
+        catch (Exception e) { JOptionPane.showMessageDialog(null, "No se ha cargado el dataset", "Advertencia", JOptionPane.WARNING_MESSAGE); }
 
     }//GEN-LAST:event_btnRealizarEntrenamientoActionPerformed
 
     private void menuTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTablasActionPerformed
         // TODO add your handling code here:
-        System.out.println("Suma distict K: ");
+        if (controlador.existeArchivo("D:\\datosEntrenamiento.txt")) {
+            controlador.guardarDatosEntrenamiento();
+            TablasEntrenamiento entrenamiento = new TablasEntrenamiento();
+            entrenamiento.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No se ha realizado el entrenamiento de los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_menuTablasActionPerformed
 
     private void menuTablasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTablasMouseClicked
         // TODO add your handling code here:
-        Archivo ar = new Archivo();
-        ar.escribirArchivo(datosProcesados);
+//        Archivo ar = new Archivo();
+//        ar.escribirArchivo();
+        
+//        if (controlador.existeArchivo("D:\\datosEntrenamiento.txt")) {
+            controlador.guardarDatosEntrenamiento();
+            TablasEntrenamiento entrenamiento = new TablasEntrenamiento();
+            entrenamiento.setVisible(true);
+//        }
+//        else {
+//            JOptionPane.showMessageDialog(null, "No se ha realizado el entrenamiento de los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+//        }
     }//GEN-LAST:event_menuTablasMouseClicked
 
     /**

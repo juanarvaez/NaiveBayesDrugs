@@ -101,7 +101,7 @@ public class Ordenamiento {
     public ArrayList<String> procesarListaDecimales(ArrayList<Double> lista, Double precision) {
         ArrayList<String> listaProcesada = new ArrayList<>();
         for (int i = 0; i < lista.size(); i++) {
-            listaProcesada.add(Double.toString((Math.ceil(lista.get(i)/precision)) * precision));
+            listaProcesada.add(Double.toString((Math.round(lista.get(i)/precision)) * precision));
         }
         return listaProcesada;
     }

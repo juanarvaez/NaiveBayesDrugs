@@ -97,5 +97,62 @@ public class Controlador {
         Probabilidad pr = new Probabilidad();
         tabla7 = pr.tabla7(datosProcesados, precisionK);
     }
+
+    public void guardarDatosEntrenamiento() {
+        ArrayList<String[]> datos = new ArrayList<>();
+        datos.add(tabla1);
+        
+        for (int i = 0; i < 4; i++) {
+            String[] linea = new String[5];
+            for (int j = 0; j < 5; j++) {
+                linea[j] = tabla2[i][j];
+            }
+            datos.add(linea);
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            String[] linea = new String[6];
+            for (int j = 0; j < 6; j++) {
+                linea[j] = tabla3[i][j];
+            }
+            datos.add(linea);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            String[] linea = new String[6];
+            for (int j = 0; j < 6; j++) {
+                linea[j] = tabla4[i][j];
+            }
+            datos.add(linea);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            String[] linea = new String[6];
+            for (int j = 0; j < 6; j++) {
+                linea[j] = tabla5[i][j];
+            }
+            datos.add(linea);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            String[] linea = new String[5];
+            System.arraycopy(tabla6[i], 0, linea, 0, 5);
+            datos.add(linea);
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            String[] linea = new String[5];
+            System.arraycopy(tabla7[i], 0, linea, 0, 5);
+            datos.add(linea);
+        }
+        
+        objArchivo.escribirArchivo(datos);
+    }
+    
+    public boolean existeArchivo(String ruta) {
+        return objArchivo.existeArchivo(ruta);
+    }
+    
+    
     
 }

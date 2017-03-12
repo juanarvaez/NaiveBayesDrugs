@@ -23,11 +23,6 @@ public class Probabilidad {
         }
         String[] conteo = {Integer.toString(t1), Integer.toString(t2), Integer.toString(t3), Integer.toString(t4), Integer.toString(t5), Integer.toString((t1+t2+t3+t4+t5))};
         
-        for (int i = 0; i < 6; i++) {
-            System.out.print("  " + conteo[i]);
-        }
-        System.out.println("\n");
-        
         return conteo;
     }
     
@@ -82,13 +77,6 @@ public class Probabilidad {
         
         datosT2[3][0] = Double.toString(precisionEdad); datosT2[3][1] = Double.toString(precisionEdad); datosT2[3][2] = Double.toString(precisionEdad); datosT2[3][3] = Double.toString(precisionEdad); datosT2[3][4] = Double.toString(precisionEdad);
         
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print("  " + datosT2[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
         return datosT2;
     }
     
@@ -121,14 +109,7 @@ public class Probabilidad {
         datosT3[2][3] = Integer.toString(Integer.parseInt(datosT3[0][3]) + Integer.parseInt(datosT3[1][3]));
         datosT3[2][4] = Integer.toString(Integer.parseInt(datosT3[0][4]) + Integer.parseInt(datosT3[1][4]));
         datosT3[2][5] = Integer.toString(Integer.parseInt(datosT3[0][5]) + Integer.parseInt(datosT3[1][5]));
-        
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print("  " + datosT3[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
+
         return datosT3;
     }
     
@@ -171,14 +152,7 @@ public class Probabilidad {
         datosT4[3][3] = Integer.toString(Integer.parseInt(datosT4[0][3]) + Integer.parseInt(datosT4[1][3]) + Integer.parseInt(datosT4[2][3]));
         datosT4[3][4] = Integer.toString(Integer.parseInt(datosT4[0][4]) + Integer.parseInt(datosT4[1][4]) + Integer.parseInt(datosT4[2][4]));
         datosT4[3][5] = Integer.toString(Integer.parseInt(datosT4[0][5]) + Integer.parseInt(datosT4[1][5]) + Integer.parseInt(datosT4[2][5]));
-        
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 6; j++) {
-                System.out.print("  " + datosT4[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
+
         return datosT4;
     }
     
@@ -221,14 +195,7 @@ public class Probabilidad {
         datosT5[3][3] = Integer.toString(Integer.parseInt(datosT5[0][3]) + Integer.parseInt(datosT5[1][3]) + Integer.parseInt(datosT5[2][3]));
         datosT5[3][4] = Integer.toString(Integer.parseInt(datosT5[0][4]) + Integer.parseInt(datosT5[1][4]) + Integer.parseInt(datosT5[2][4]));
         datosT5[3][5] = Integer.toString(Integer.parseInt(datosT5[0][5]) + Integer.parseInt(datosT5[1][5]) + Integer.parseInt(datosT5[2][5]));
-        
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 6; j++) {
-                System.out.print("  " + datosT5[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
+
         return datosT5;
     }
     
@@ -282,16 +249,7 @@ public class Probabilidad {
         datosT6[2][0] = tabla1(datosProcesados)[0]; datosT6[2][1] = tabla1(datosProcesados)[1]; datosT6[2][2] = tabla1(datosProcesados)[2]; datosT6[2][3] = tabla1(datosProcesados)[3]; datosT6[2][4] = tabla1(datosProcesados)[4];
         
         datosT6[3][0] = Double.toString(precisionNa); datosT6[3][1] = Double.toString(precisionNa); datosT6[3][2] = Double.toString(precisionNa); datosT6[3][3] = Double.toString(precisionNa); datosT6[3][4] = Double.toString(precisionNa);
-        
-        System.out.println("\n");
-        
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print("  " + datosT6[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
+
         return datosT6;
     }
     
@@ -346,16 +304,7 @@ public class Probabilidad {
         datosT7[2][0] = tabla1(datosProcesados)[0]; datosT7[2][1] = tabla1(datosProcesados)[1]; datosT7[2][2] = tabla1(datosProcesados)[2]; datosT7[2][3] = tabla1(datosProcesados)[3]; datosT7[2][4] = tabla1(datosProcesados)[4];
         
         datosT7[3][0] = Double.toString(precisionK); datosT7[3][1] = Double.toString(precisionK); datosT7[3][2] = Double.toString(precisionK); datosT7[3][3] = Double.toString(precisionK); datosT7[3][4] = Double.toString(precisionK);
-        
-        System.out.println("\n");
-        
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print("  " + datosT7[i][j]);
-            }
-            System.out.println("\n");
-        }
-        
+ 
         return datosT7;
     }
     

@@ -6,6 +6,7 @@
 package Logica;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -38,19 +39,35 @@ public class Archivo {
         catch(Exception e) { System.err.println("No se ha podido leer el archivo"); }
     }
     
-    public void escribirArchivo(String[][] datosProcesados) {
+    public void escribirArchivo(ArrayList<String[]> datosEntrenamiento) {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
             fichero = new FileWriter("D:\\datosEntrenamiento.txt");
             pw = new PrintWriter(fichero);
 
-            for (int i = 0; i < 10; i++)
-                pw.println("Linea " + i);
-
+            for (int i = 0; i < datosEntrenamiento.size(); i++) {
+//                for (int j = 0; j < datosEntrenamiento.get(i).length; j++) {
+                    pw.println(prepararLinea(datosEntrenamiento.get(i)));
+//                }
+            }
             fichero.close();
         } catch (Exception e) { e.printStackTrace(); }
 
+    }
+    
+    public String prepararLinea(String[] datos) {
+        String linea = "";
+        for (int i = 0; i < datos.length; i++) {
+            if (i != (datos.length - 1)) linea = linea + datos[i] + ",";
+            else linea = linea + datos[i];
+        }
+        return linea;
+    }
+    
+    public boolean existeArchivo(String ruta) {
+        File fichero = new File(ruta);
+        return fichero.exists();
     }
     
     //Metodo que muestra el valor de los parametros de los atributos
