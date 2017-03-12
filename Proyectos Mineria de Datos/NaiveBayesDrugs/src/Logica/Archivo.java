@@ -123,5 +123,21 @@ public class Archivo {
     public ArrayList<Double> obtenerListaKOrdenada() {
         return K;
     }
+    
+    public ArrayList<String[]> leerDatosEntrenamiento() {
+        ArrayList<String[]> datos = new ArrayList<>();
+        
+        try {
+            String cadena;
+            FileReader f = new FileReader("D:\\datosEntrenamiento.txt");
+            try (BufferedReader b = new BufferedReader(f)) {
+                while((cadena = b.readLine()) != null) {
+                    datos.add(cadena.split(","));
+                }
+            }
+            return datos;
+        }
+        catch(Exception e) { System.err.println("No se ha podido leer el archivo"); return null;}
+    }
      
 }

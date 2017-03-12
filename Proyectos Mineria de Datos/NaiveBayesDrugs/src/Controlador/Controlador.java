@@ -149,8 +149,12 @@ public class Controlador {
         objArchivo.escribirArchivo(datos);
     }
     
-    public boolean existeArchivo(String ruta) {
-        return objArchivo.existeArchivo(ruta);
+    public void existe(String ruta) {
+        boolean resultado = false;
+        if(objArchivo.existeArchivo(ruta)) resultado = true;
+        
+        System.out.println(resultado);
+        //return resultado;
     }
     
     

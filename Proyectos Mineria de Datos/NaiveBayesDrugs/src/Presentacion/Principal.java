@@ -461,29 +461,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuTablasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTablasActionPerformed
         // TODO add your handling code here:
-        if (controlador.existeArchivo("D:\\datosEntrenamiento.txt")) {
-            controlador.guardarDatosEntrenamiento();
+//        if (controlador.existeArchivo("D:\\datosEntrenamiento.txt")) {
+//            controlador.guardarDatosEntrenamiento();
+//            TablasEntrenamiento entrenamiento = new TablasEntrenamiento();
+//            entrenamiento.setVisible(true);
+//        }
+//        else {
+//            JOptionPane.showMessageDialog(null, "No se ha realizado el entrenamiento de los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+//        }
+    }//GEN-LAST:event_menuTablasActionPerformed
+
+    private void menuTablasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTablasMouseClicked
+        // TODO add your handling code here:
+        Archivo ar = new Archivo();
+//        ar.escribirArchivo();
+//        ar.existeArchivo("D:\\datosEntrenamiento.txt");
+        if (ar.existeArchivo("D:\\datosEntrenamiento.txt")) {
+            //controlador.guardarDatosEntrenamiento();
             TablasEntrenamiento entrenamiento = new TablasEntrenamiento();
             entrenamiento.setVisible(true);
         }
         else {
             JOptionPane.showMessageDialog(null, "No se ha realizado el entrenamiento de los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_menuTablasActionPerformed
-
-    private void menuTablasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTablasMouseClicked
-        // TODO add your handling code here:
-//        Archivo ar = new Archivo();
-//        ar.escribirArchivo();
-        
-//        if (controlador.existeArchivo("D:\\datosEntrenamiento.txt")) {
-            controlador.guardarDatosEntrenamiento();
-            TablasEntrenamiento entrenamiento = new TablasEntrenamiento();
-            entrenamiento.setVisible(true);
-//        }
-//        else {
-//            JOptionPane.showMessageDialog(null, "No se ha realizado el entrenamiento de los datos", "Advertencia", JOptionPane.WARNING_MESSAGE);
-//        }
     }//GEN-LAST:event_menuTablasMouseClicked
 
     /**

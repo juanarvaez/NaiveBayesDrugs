@@ -5,6 +5,9 @@
  */
 package Presentacion;
 
+import Logica.Archivo;
+import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,13 +17,20 @@ import javax.swing.table.DefaultTableModel;
 public class TablasEntrenamiento extends javax.swing.JFrame {
     
     DefaultTableModel t1, t2, t3, t4, t5, t6, t7, t8;
+    ArrayList<String[]> datosEntrenamiento = new ArrayList<>();
+    Archivo archivo = new Archivo();
 
     /**
      * Creates new form TablasEntrenamiento
      */
     public TablasEntrenamiento() {
         initComponents();
+        this.getContentPane().setBackground(Color.white);
+        jPanel1.setBackground(Color.white);
+        this.setLocationRelativeTo(null);
         prepararTablas();
+        datosEntrenamiento = archivo.leerDatosEntrenamiento();
+        llenarTablas();
     }
     
     public final void prepararTablas() {
@@ -50,6 +60,17 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         this.tablaSexo.setModel(t6);
         this.tablaProbabilidadesGenerales.setModel(t7);
         this.tablaDatosInicialesNormalizados.setModel(t8);
+    }
+    
+    public final void llenarTablas() {
+        t8.addRow(datosEntrenamiento.get(0));
+        
+        for (int i = 1; i < 5; i++) t5.addRow(datosEntrenamiento.get(i));
+        for (int i = 5; i < 8; i++) t6.addRow(datosEntrenamiento.get(i));
+        for (int i = 8; i < 12; i++) t1.addRow(datosEntrenamiento.get(i));
+        for (int i = 12; i < 16; i++) t2.addRow(datosEntrenamiento.get(i));
+        for (int i = 16; i < 20; i++) t3.addRow(datosEntrenamiento.get(i));
+        for (int i = 20; i < 24; i++) t4.addRow(datosEntrenamiento.get(i));
     }
 
     /**
@@ -335,9 +356,9 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane6)
@@ -426,7 +447,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
                             .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15)
                             .addComponent(txtDrogaResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -517,4 +538,6 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     private javax.swing.JTextField txtProbabilidad;
     private javax.swing.JTextField txtSexo;
     // End of variables declaration//GEN-END:variables
+
+    
 }
