@@ -9,6 +9,7 @@ import Logica.Archivo;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.math3.distribution.NormalDistribution;
 
 /**
  *
@@ -86,13 +87,13 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     }
     
     public void obtenerDatosEntrada() {
-        datosNuevoRegistro[0] = txtEdad.getText();
-        datosNuevoRegistro[1] = txtSexo.getText();
-        datosNuevoRegistro[2] = txtBP.getText();
-        datosNuevoRegistro[3] = txtColesterol.getText();
-        datosNuevoRegistro[4] = txtNa.getText();
-        datosNuevoRegistro[5] = txtK.getText();
-        datosNuevoRegistro[6] = txtDrogaEntrada.getText();
+        datosNuevoRegistro[0] = "49";//txtEdad.getText();
+        datosNuevoRegistro[1] = "F";//txtSexo.getText();
+        datosNuevoRegistro[2] = "NORMAL";//txtBP.getText();
+        datosNuevoRegistro[3] = "HIGH";//txtColesterol.getText();
+        datosNuevoRegistro[4] = "0.789637";//txtNa.getText();
+        datosNuevoRegistro[5] = "0.048518";//txtK.getText();
+        datosNuevoRegistro[6] = "drugY";//txtDrogaEntrada.getText();
     }
     
     public void normalizarDatosEntrada() {
@@ -101,6 +102,127 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         datosNuevosNormalizados[4] = Double.toString((Math.round(Double.parseDouble(datosNuevoRegistro[4])/Double.parseDouble(datosEntrenamiento.get(19)[0]))) * Double.parseDouble(datosEntrenamiento.get(19)[0]));
         datosNuevosNormalizados[5] = Double.toString((Math.round(Double.parseDouble(datosNuevoRegistro[5])/Double.parseDouble(datosEntrenamiento.get(23)[0]))) * Double.parseDouble(datosEntrenamiento.get(23)[0]));
     }
+    
+    public void llenarTablaProbabilidades() {
+        PApriori();
+        PAge();
+        PSex();
+        PBP();
+        PCholesterol();
+        PNa();
+        PK();
+    }
+    
+    public void PApriori() {
+        String[] linea = new String[5];
+        for (int i = 0; i < datosEntrenamiento.get(0).length - 1; i++) {
+            probabilidades[0][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(0)[i])/Double.parseDouble(datosEntrenamiento.get(0)[5]));
+            linea[i] = probabilidades[0][i];
+        }
+        t7.addRow(linea);
+    }
+    
+    public void PAge() {
+        String[] linea = new String[5];
+        
+        for (int i = 0; i < datosEntrenamiento.get(1).length; i++) {
+            NormalDistribution normal = new NormalDistribution(Double.parseDouble(datosEntrenamiento.get(1)[i]), Double.parseDouble(datosEntrenamiento.get(2)[i]));
+            probabilidades[1][i] = Double.toString(normal.density(Double.parseDouble(datosNuevosNormalizados[0])));
+            linea[i] = probabilidades[1][i];
+        }
+        t7.addRow(linea);
+    }
+    
+    public void PSex() {
+        String[] linea = new String[5];
+        if(datosNuevoRegistro[1].equals("F")) {
+            for (int i = 0; i < datosEntrenamiento.get(5).length - 1; i++) {
+                probabilidades[2][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(5)[i])/Double.parseDouble(datosEntrenamiento.get(7)[i]));
+                linea[i] = probabilidades[2][i];
+            }
+        }
+        else {
+            for (int i = 0; i < datosEntrenamiento.get(6).length - 1; i++) {
+                probabilidades[2][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(6)[i])/Double.parseDouble(datosEntrenamiento.get(7)[i]));
+                linea[i] = probabilidades[2][i];
+            }
+        }
+        t7.addRow(linea);        
+    }
+    
+    public void PBP() {
+        String[] linea = new String[5];
+        if(datosNuevoRegistro[2].equals("HIGH")) {
+            for (int i = 0; i < datosEntrenamiento.get(8).length - 1; i++) {
+                probabilidades[3][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(8)[i])/Double.parseDouble(datosEntrenamiento.get(11)[i]));
+                linea[i] = probabilidades[3][i];
+            }
+        }
+        else {
+            if(datosNuevoRegistro[2].equals("NORMAL")) {
+                for (int i = 0; i < datosEntrenamiento.get(9).length - 1; i++) {
+                    probabilidades[3][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(9)[i])/Double.parseDouble(datosEntrenamiento.get(11)[i]));
+                    linea[i] = probabilidades[3][i];
+                }
+            }
+            else {
+                for (int i = 0; i < datosEntrenamiento.get(10).length - 1; i++) {
+                    probabilidades[3][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(10)[i])/Double.parseDouble(datosEntrenamiento.get(11)[i]));
+                    linea[i] = probabilidades[3][i];
+                }
+            }
+        }
+        t7.addRow(linea);        
+    }
+    
+    public void PCholesterol() {
+        String[] linea = new String[5];
+        if(datosNuevoRegistro[3].equals("HIGH")) {
+            for (int i = 0; i < datosEntrenamiento.get(12).length - 1; i++) {
+                probabilidades[4][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(12)[i])/Double.parseDouble(datosEntrenamiento.get(15)[i]));
+                linea[i] = probabilidades[4][i];
+            }
+        }
+        else {
+            if(datosNuevoRegistro[2].equals("NORMAL")) {
+                for (int i = 0; i < datosEntrenamiento.get(13).length - 1; i++) {
+                    probabilidades[4][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(13)[i])/Double.parseDouble(datosEntrenamiento.get(15)[i]));
+                    linea[i] = probabilidades[4][i];
+                }
+            }
+            else {
+                for (int i = 0; i < datosEntrenamiento.get(14).length - 1; i++) {
+                    probabilidades[4][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(14)[i])/Double.parseDouble(datosEntrenamiento.get(15)[i]));
+                    linea[i] = probabilidades[4][i];
+                }
+            }
+        }
+        t7.addRow(linea);        
+    }
+    
+    public void PNa() {
+        String[] linea = new String[5];
+        
+        for (int i = 0; i < datosEntrenamiento.get(16).length; i++) {
+            NormalDistribution normal = new NormalDistribution(Double.parseDouble(datosEntrenamiento.get(16)[i]), Double.parseDouble(datosEntrenamiento.get(17)[i]));
+            probabilidades[5][i] = Double.toString(normal.density(Double.parseDouble(datosNuevosNormalizados[4])));
+            linea[i] = probabilidades[5][i];
+        }
+        t7.addRow(linea);
+    }
+    
+    public void PK() {
+        String[] linea = new String[5];
+        
+        for (int i = 0; i < datosEntrenamiento.get(20).length; i++) {
+            NormalDistribution normal = new NormalDistribution(Double.parseDouble(datosEntrenamiento.get(20)[i]), Double.parseDouble(datosEntrenamiento.get(21)[i]));
+            probabilidades[6][i] = Double.toString(normal.density(Double.parseDouble(datosNuevosNormalizados[5])));
+            linea[i] = probabilidades[6][i];
+        }
+        t7.addRow(linea);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -440,6 +562,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         t8.addRow(datosNuevoRegistro);
         normalizarDatosEntrada();
         t8.addRow(datosNuevosNormalizados);
+        llenarTablaProbabilidades();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
