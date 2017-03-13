@@ -8,6 +8,8 @@ package Presentacion;
 import Logica.Archivo;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.math3.distribution.NormalDistribution;
 
@@ -22,6 +24,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     String[] datosNuevoRegistro = new String[7];
     String[] datosNuevosNormalizados;
     String[][] probabilidades = new String[9][5];
+    Double sumProbabilidades, maxPorcentaje;
+    String drogaSeleccionada;
     Archivo archivo = new Archivo();
 
     /**
@@ -87,13 +91,13 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
     }
     
     public void obtenerDatosEntrada() {
-        datosNuevoRegistro[0] = "49";//txtEdad.getText();
-        datosNuevoRegistro[1] = "F";//txtSexo.getText();
-        datosNuevoRegistro[2] = "NORMAL";//txtBP.getText();
-        datosNuevoRegistro[3] = "HIGH";//txtColesterol.getText();
-        datosNuevoRegistro[4] = "0.789637";//txtNa.getText();
-        datosNuevoRegistro[5] = "0.048518";//txtK.getText();
-        datosNuevoRegistro[6] = "drugY";//txtDrogaEntrada.getText();
+        datosNuevoRegistro[0] = txtEdad.getText();
+        datosNuevoRegistro[1] = txtSexo.getText();
+        datosNuevoRegistro[2] = txtBP.getText();
+        datosNuevoRegistro[3] = txtColesterol.getText();
+        datosNuevoRegistro[4] = txtNa.getText();
+        datosNuevoRegistro[5] = txtK.getText();
+        datosNuevoRegistro[6] = txtDrogaEntrada.getText();
     }
     
     public void normalizarDatosEntrada() {
@@ -111,6 +115,13 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         PCholesterol();
         PNa();
         PK();
+        P();
+        PPorcentaje();
+        seleccionarDroga();
+        txtDrogaResultado.setText(drogaSeleccionada);
+        
+        if(txtDrogaResultado.getText().equals(txtDrogaEntrada.getText())) JOptionPane.showMessageDialog(null, "CORRECTO", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+        else JOptionPane.showMessageDialog(null, "INCORRECTO", "Resultado", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void PApriori() {
@@ -222,7 +233,68 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
         t7.addRow(linea);
     }
     
+    public void P() {
+        String[] linea = new String[5];
+        Double sum = 0.0;
+        for (int i = 0; i < 5; i++) {
+            Double producto = 1.0;
+            for (int j = 0; j < 7; j++) {
+                producto = producto * Double.parseDouble(probabilidades[j][i]);
+            }
+            probabilidades[7][i] = Double.toString(producto);
+            linea[i] = probabilidades[7][i];
+            sum = sum + producto;
+        }
+        sumProbabilidades = sum;
+        txtProbabilidad.setText(Double.toString(sum));
+        t7.addRow(linea);
+    }
     
+    public void PPorcentaje() {
+        String[] linea = new String[5];
+        for (int i = 0; i < 5; i++) {
+            probabilidades[8][i] = Double.toString(Double.parseDouble(probabilidades[7][i])/sumProbabilidades);
+            linea[i] = probabilidades[8][i];
+        }
+        maxPorcentaje = maxValor(linea);
+        txtPorcentaje.setText(Double.toString(maxPorcentaje * 100));
+        t7.addRow(linea);
+    }
+    
+    public void seleccionarDroga() {
+        if(Double.toString(maxPorcentaje).equals(probabilidades[8][0])) {
+            drogaSeleccionada = "drugA";
+        }
+        else {
+            if(Double.toString(maxPorcentaje).equals(probabilidades[8][1])) {
+                drogaSeleccionada = "drugB";
+            }
+            else {
+                if(Double.toString(maxPorcentaje).equals(probabilidades[8][2])) {
+                    drogaSeleccionada = "drugB";
+                }
+                else {
+                    if(Double.toString(maxPorcentaje).equals(probabilidades[8][3])) {
+                        drogaSeleccionada = "drugX";
+                    }
+                    else {
+                        drogaSeleccionada = "drugY";
+                    }
+                }
+            }
+        }
+    }
+    
+    public Double maxValor(String[] linea){
+        
+        ArrayList<Double> datos = new ArrayList<>();
+        Collections.sort(datos);
+
+        for (String linea1 : linea) datos.add(Double.parseDouble(linea1));
+        Collections.sort(datos);
+        
+        return datos.get(datos.size() - 1);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -558,6 +630,8 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        t7.setRowCount(0);
+        t8.setRowCount(0);
         obtenerDatosEntrada();
         t8.addRow(datosNuevoRegistro);
         normalizarDatosEntrada();
