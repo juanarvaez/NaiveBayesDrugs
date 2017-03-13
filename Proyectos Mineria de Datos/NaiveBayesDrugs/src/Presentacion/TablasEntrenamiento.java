@@ -195,7 +195,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
             }
         }
         else {
-            if(datosNuevoRegistro[2].equals("NORMAL")) {
+            if(datosNuevoRegistro[3].equals("NORMAL")) {
                 for (int i = 0; i < datosEntrenamiento.get(13).length - 1; i++) {
                     probabilidades[4][i] = Double.toString(Double.parseDouble(datosEntrenamiento.get(13)[i])/Double.parseDouble(datosEntrenamiento.get(15)[i]));
                     linea[i] = probabilidades[4][i];
@@ -271,7 +271,7 @@ public class TablasEntrenamiento extends javax.swing.JFrame {
             }
             else {
                 if(Double.toString(maxPorcentaje).equals(probabilidades[8][2])) {
-                    drogaSeleccionada = "drugB";
+                    drogaSeleccionada = "drugC";
                 }
                 else {
                     if(Double.toString(maxPorcentaje).equals(probabilidades[8][3])) {
